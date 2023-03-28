@@ -9,13 +9,18 @@ import Button from "@mui/material/Button";
 import {useContext} from "react";
 import {GeneralContext} from "../../GeneralContext.jsx";
 import {data} from "../../../Products.json"
+import {useLocation} from "react-router-dom";
 
 export default function HoodData() {
-    const {hodies,addItemToCart} =useContext(GeneralContext)
+    const {item,addItemToCart} =useContext(GeneralContext)
+    const location = useLocation();
+    const currentPath = location.pathname;
+    const newPath = currentPath.slice(1);
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                {data.map((item) => (
+                {item.map((item) => (
+                    item.type === newPath ?
                     <Grid item xs={2} sm={4} md={3} key={item.id}>
                         <MediaCard data={item}></MediaCard>
                         <CardActions sx={
@@ -31,6 +36,8 @@ export default function HoodData() {
                             </Button>
                         </CardActions>
                     </Grid>
+                        :
+                        <></>
                 ))}
             </Grid>
         </Box>

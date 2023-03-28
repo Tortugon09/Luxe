@@ -52,18 +52,21 @@ const theme = createTheme({
 
 
 
-export default function SignInSide() {
-    const {login}= useContext(GeneralContext)
+export default function SignUpSide() {
+    const {createUserPost} = useContext(GeneralContext)
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const dat1= {
             email: data.get('email'),
-                password: data.get('password'),
+            password: data.get('password'),
+            lastName: data.get('lastName'),
+            name: data.get('name'),
+            phone: data.get('phone')
         }
         console.log(dat1)
-       login(dat1)
+        createUserPost(dat1)
     };
 
     return (
@@ -125,6 +128,39 @@ export default function SignInSide() {
                                 id="password"
                                 autoComplete="current-password"
                             />
+                            <TextField
+                                color='primary'
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="name"
+                                label="Nombres"
+                                type="name"
+                                id="name"
+                                autoComplete="current-password"
+                            />
+                            <TextField
+                                color='primary'
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="lastName"
+                                label="Apellidos"
+                                type="lastName"
+                                id="lastName"
+                                autoComplete="current-password"
+                            />
+                            <TextField
+                                color='primary'
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="phone"
+                                label="Telefono (10 digitos)"
+                                type="phone"
+                                id="phone"
+                                autoComplete="current-password"
+                            />
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
@@ -145,7 +181,7 @@ export default function SignInSide() {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="/SingUp" variant="body2">
+                                    <Link href="/" variant="body2">
                                         {"Don't have an account? Sign Up"}
                                     </Link>
                                 </Grid>

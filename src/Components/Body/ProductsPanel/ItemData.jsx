@@ -37,7 +37,7 @@ export default function ItemData() {
         name:"",
         price: "",
         quantity:"",
-        productTypeId: ""
+        type: ""
     });
 
     const handleChange = e => {
@@ -56,14 +56,15 @@ export default function ItemData() {
         console.log(...formData)
         const k = [...formData]
         console.log(k)
-        axios.post('http://3.16.48.171:8080/file', formData
+        axios.post('http://localhost:8080/file', formData
         ).then(function (response) {
             console.log(response)
-            setproduct({...product, cakePicture: response.data});
+            setproduct({...product, cakePicture: response.data.data});
         }).catch(function (error) {
             console.log(error);
         });
     }
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Button onClick={handleOpen} sx={{
@@ -104,10 +105,11 @@ export default function ItemData() {
                     margin="normal"
                     required
                     fullWidth
-                    name="productTypeId"
-                    label="productTypeId"
-                    id="productTypeId"
-                    autoComplete="productTypeId"
+                    id="type"
+                    label="Type"
+                    name="type"
+                    autoComplete="type"
+                    autoFocus
                 />
                 <TextField
                     onChange={handleChange}

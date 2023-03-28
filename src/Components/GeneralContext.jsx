@@ -52,6 +52,7 @@ export const GeneralProvider = ({children}) => {
     const [hodies, setHodies] = useState([]);
     const [tShirts, setTshirts] = useState([]);
     const [item, setItems] = useState([]);
+    const [uniqueSections, setUniqueSections] = useState([]);
 
     const [cartItems, setCartItems] = useState(  () => {
         try {
@@ -136,15 +137,23 @@ export const GeneralProvider = ({children}) => {
             })
     }
 
+    const createUserPost = async(user) => {
+        const { email, lastName, name, password,phone } = user;
+        await axios.post("http://localhost:8080/client/register", { email ,lastName , name, password , phone });
+        navigate("/")
+    }
 
     useEffect(() => {
         getProducts();
+        console.log((item.map(data => data.type)))
+        setUniqueSections([(item.map(data => data.type))]);
     }, []);
 
     const getProducts = async () => {
         await axios
             .get("http://localhost:8080/product/list")
-            .then(({ data }) => setItems(data.data));
+            .then(({ data }) =>{
+                setItems(data.data)});
 
     };
     const getSneakers = async () => {
@@ -163,19 +172,15 @@ export const GeneralProvider = ({children}) => {
             .then(({ data }) => setTshirts(data.data));
     };
 
-    useEffect(() => {
-        getSneakers()
-        getHodies()
-        getTShirts()
-    }, []);
+
 
 
 
 
     const addItem = async (product) => {
-        const { description,name, quantity, price,productTypeId,cakePicture } = product;
+        const { description,name, quantity, price,productTypeId,cakePicture,type } = product;
 
-        await axios.post("http://localhost:8080/product", { description ,name,price, quantity, productTypeId,cakePicture});
+        await axios.post("http://localhost:8080/product", { description ,name,price, quantity, productTypeId,cakePicture,type});
 
         getSneakers()
         getHodies()
@@ -224,10 +229,9 @@ export const GeneralProvider = ({children}) => {
             editItem,
             delateItem,
             cartItems,
-            setCartItems
-
-
-
+            setCartItems,
+            createUserPost,
+            uniqueSections
         }}>
             {children}
         </GeneralContext.Provider>

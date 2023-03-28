@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Hood from "../../../assets/sueter.png"
 
 export default function MediaCard({data}) {
-    const {img,description,name,price} = data
+    const {img,description,name,price,cakePicture} = data
     return (
         <Card sx={{ maxWidth: 400,
                     padding: 5
@@ -24,7 +24,7 @@ export default function MediaCard({data}) {
             }}
                 component="img"
                 height="280"
-                image={img}
+                image={cakePicture}
                 alt="TenisProducto"
             />
             <CardContent>
