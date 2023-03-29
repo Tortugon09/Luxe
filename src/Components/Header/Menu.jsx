@@ -107,6 +107,7 @@ const {
             cartItems.reduce((previous, current) => previous + current.amount, 0)
         );
     }, [cartItems]);
+
     const [Select, SetSelect] = useState(false)
     const [OpenS, SetOpenS] = useState(false)
     const handleChange = (value) => {

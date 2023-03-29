@@ -156,24 +156,6 @@ export const GeneralProvider = ({children}) => {
                 setItems(data.data)});
 
     };
-    const getSneakers = async () => {
-        await axios
-            .get("http://localhost:8080/product/type/1")
-            .then(({ data }) => setSneakers(data.data));
-    };
-    const getHodies = async () => {
-        await axios
-            .get("http://localhost:8080/product/type/2")
-            .then(({ data }) => setHodies(data.data));
-    };
-    const getTShirts = async () => {
-        await axios
-            .get("http://localhost:8080/product/type/3")
-            .then(({ data }) => setTshirts(data.data));
-    };
-
-
-
 
 
 
